@@ -1,12 +1,15 @@
 <template>
     <input type="text" placeholder="Введите название или автора книги" v-on:input="chooseBooks">
     <div class="buttons">
-        <button v-on:click="sortBooksByNameAsc">А-Я</button>
-        <button v-on:click="sortBooksByNameDesc">Я-А</button>
-        <button v-on:click="sortBooksByYearAsc">Старые</button>
-        <button v-on:click="sortBooksByYearDesc">Новые</button>
-        <button v-on:click="sortBooksByRatingDesc">Лучшие</button>
-        <button v-on:click="sortBooksByRatingAsc">Худшие</button>
+        <select name="sortedBooks" id="sortedBooks" v-on:change="selectValue">
+            <option value=""></option>
+            <option value="nameAsc">По названию: А-Я</option>
+            <option value="nameDesc">По названию: Я-А</option>
+            <option value="yearAsc">По году издания: Старее</option>
+            <option value="yearDesc">По году издания: Новее</option>
+            <option value="ratingDesc">По рейтингу: Лучшие</option>
+            <option value="ratingAsc">По рейтингу: Худшие</option>
+        </select>
     </div>
     <div class="field">
         <h1 v-if="books.length === 0">КНИГИ НЕ НАЙДЕНЫ!</h1>
@@ -119,6 +122,24 @@ export default {
             this.books.sort((a, b) => {
                 return b.rating - a.rating;
             })
+        },
+
+        selectValue(event) {
+            if (event.target.value === "nameAsc") {
+                this.sortBooksByNameAsc()
+            } else if (event.target.value === "nameDesc") {
+                this.sortBooksByNameDesc()
+            } else if (event.target.value === "yearAsc") {
+                this.sortBooksByYearAsc()
+            } else if (event.target.value === "yearDesc") {
+                this.sortBooksByYearDesc()
+            } else if (event.target.value === "ratingAsc") {
+                this.sortBooksByRatingAsc()
+            } else if (event.target.value === "ratingDesc") {
+                this.sortBooksByRatingDesc()
+            } else {
+                this.getArray()
+            }
         }
     }
 }
