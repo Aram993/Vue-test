@@ -115,7 +115,7 @@ import crossIcon from '@/assets/images/cross.svg';
 
 
 
-<style>
+<style scoped>
     * {
         box-sizing: border-box;
     }
