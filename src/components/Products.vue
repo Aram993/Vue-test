@@ -58,33 +58,9 @@
             }
         }, methods: {
 
-            getElectronics(arr) {
+            getCategory(arr, value) {
                 return arr.filter(item => {
-                    return item.category === "Электроника";
-                })
-            },
-
-            getClothes(arr) {
-                return arr.filter(item => {
-                    return item.category === "Одежда";
-                })
-            },
-
-            getBooks(arr) {
-                return arr.filter(item => {
-                    return item.category === "Книги";
-                })
-            },
-
-            getShoes(arr) {
-                return arr.filter(item => {
-                    return item.category === "Обувь";
-                })
-            },
-
-            getAccessories(arr) {
-                return arr.filter(item => {
-                    return item.category === "Аксессуары";
+                    return item.category === value;
                 })
             },
 
@@ -127,15 +103,15 @@
                 let productsArray = this.products;
 
                 if (this.categoryValue === "Электроника") {
-                    productsArray = this.getElectronics(productsArray);
+                    productsArray = this.getCategory(productsArray, "Электроника");
                 } else if (this.categoryValue ==="Одежда") {
-                    productsArray = this.getClothes(productsArray);
+                    productsArray = this.getCategory(productsArray, "Одежда");
                 } else if (this.categoryValue ==="Книги") {
-                    productsArray = this.getBooks(productsArray);
+                    productsArray = this.getCategory(productsArray, "Книги");
                 } else if (this.categoryValue ==="Обувь") {
-                    productsArray = this.getShoes(productsArray);
+                    productsArray = this.getCategory(productsArray, "Обувь");
                 } else if (this.categoryValue ==="Аксессуары") {
-                    productsArray = this.getAccessories(productsArray);
+                    productsArray = this.getCategory(productsArray, "Аксессуары");
                 }
 
                 if (this.priceValue === "priceAsc") {
