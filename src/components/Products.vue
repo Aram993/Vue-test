@@ -29,7 +29,6 @@
         name: "Products",
         data() {
             return {
-
                 products: [
                             { id: 1, name: 'Ноутбук', category: 'Электроника', price: 50000, isAvailable: true },
                             { id: 2, name: 'Футболка', category: 'Одежда', price: 1500, isAvailable: true },
@@ -44,9 +43,7 @@
                             { id: 11, name: 'Сумка', category: 'Аксессуары', price: 2500, isAvailable: true },
                             { id: 12, name: 'Фитнес-трекер', category: 'Электроника', price: 6000, isAvailable: true },
                         ],
-                
-                productCategory: [],
-
+        
                 categoryValue: "",
 
                 priceValue: "priceAsc",
@@ -59,71 +56,46 @@
         }, methods: {
 
             getCategory(arr, value) {
+                if(!value) {
+                    return arr;
+                }
+
                 return arr.filter(item => {
                     return item.category === value;
                 })
             },
 
-            sortProductsAsc(arr) {
-                return arr.sort((a, b) => {
+            sortProductsAsc(arr, direction) {
+                if(direction === 'priceAsc') {
+                    return arr.sort((a, b) => {
                     return a.price - b.price;
-                })
-            },
-
-            sortProductsDesc(arr) {
-                return arr.sort((a, b) => {
+                     })
+                }else {
+                    return arr.sort((a, b) => {
                     return b.price - a.price;
-                })
+                    })
+                }
+                
             },
 
             getProductsInRange(item) {
-                let result = false;
-
-                if ((item.price >= this.priceBefore) && (item.price <= this.priceAfter)) {
-                    if (item.isAvailable) {
-                        result = true;
-                    }
-                }
-
-                return result;
+                return item.price >= this.priceBefore && item.price <= this.priceAfter && item.isAvailable;
             }
 
         }, computed: {
 
             categoryProducts() {
-                this.products.forEach(product => {
-                    if (!this.productCategory.includes(product.category)) {
-                        this.productCategory.push(product.category);
-                    }
-                })
-
-                return this.productCategory;
+                return new Set(this.products.map(item => item.category));
             },
             filteredProducts() {
-                let productsArray = this.products;
-
-                if (this.categoryValue === "Электроника") {
-                    productsArray = this.getCategory(productsArray, "Электроника");
-                } else if (this.categoryValue ==="Одежда") {
-                    productsArray = this.getCategory(productsArray, "Одежда");
-                } else if (this.categoryValue ==="Книги") {
-                    productsArray = this.getCategory(productsArray, "Книги");
-                } else if (this.categoryValue ==="Обувь") {
-                    productsArray = this.getCategory(productsArray, "Обувь");
-                } else if (this.categoryValue ==="Аксессуары") {
-                    productsArray = this.getCategory(productsArray, "Аксессуары");
-                }
-
-                if (this.priceValue === "priceAsc") {
-                    this.sortProductsAsc(productsArray);
-                } else {
-                    this.sortProductsDesc(productsArray);
-                }
+                let productsArray = [...this.products];
+                productsArray = this.getCategory(productsArray, (this.categoryValue));
+                this.sortProductsAsc(productsArray, this.priceValue);
 
                 return productsArray;
             }
         }
-    }
+    } 
 </script>
 <style>
 
