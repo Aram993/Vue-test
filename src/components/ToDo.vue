@@ -228,14 +228,14 @@ import crossIcon from '@/assets/images/cross.svg';
         border: 2px solid black;
     }
 
-    .container {
+    /* .container {
         position: absolute;
         top: 30%;
         left: 30%;
         transform: translate(-30%, -30%);
         display: flex;
         gap: 250px;
-    }
+    } */
 
     form {
         display: flex;

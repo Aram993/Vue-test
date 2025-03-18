@@ -97,7 +97,7 @@
         }
     } 
 </script>
-<style>
+<style scoped>
 
     #category {
         position: absolute;

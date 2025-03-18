@@ -1,5 +1,5 @@
 <template>
-    <div class="wrap">
+    <div class="wrapper">
         <button @click="onToggleBlock">Press me</button>
        <div ref="block" class="block">
             <span style="display: block;">Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты. Алфавит, снова. Ручеек ему назад все что несколько путь пустился но пор моей наш. Текстами семантика приставка даль агентство большого?</span>
@@ -31,8 +31,8 @@ export default {
 }
 </script>
 
-<style>
-    .wrap {
+<style scoped>
+    .wrapper {
         display: flex;
         flex-direction: column;
         width: 500px;
