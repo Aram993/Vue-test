@@ -1,13 +1,15 @@
 <template>
         <div class="container">
             <h1>{{ newsTitle }}</h1>
-            <button @click="skip = false, $emit('incrementOpen')" v-if="skip">Открыть</button>
-            <button @click="skip = true, $emit('decrementOpen')" v-else>Закрыть</button>
-            <div :class="{'info': true, 'skipInfo': skip}">
+            <div class="buttons">
+                <button @click="showInfoBlock" v-if="skip" class="btns">Открыть</button>
+                <button @click="skipInfoBlock" v-else class="btns">Закрыть</button>
+                <button :class="{'noRead': true, 'skipBtn': skipNoRead}" @click="skipNoRead = true, $emit('decrementRead')">Отметить непрочитанной</button>
+            </div>
+            <div :class="{'info': true, 'skipInfo': skip}" ref="skipInfo">
                 <span>{{ newsDescription }}</span>
                 <div class="buttons">
-                    <button class="readNews" @click="$emit('incrementRead')">Прочесть новость</button>
-                    <button class="noRead" @click="$emit('decrementRead')">Отметить непрочитанной</button>
+                    <button :class="{'readNews': true, 'skipBtn': !skipNoRead}" @click="skipInfoBlockAndIncrementRead">Прочесть новость</button>
                 </div>
             </div>
         </div>
@@ -19,10 +21,30 @@
         emits: ['incrementOpen', 'decrementOpen', 'incrementRead', 'decrementRead'],
         data() {
             return {
-                skip: true
+                skip: true,
+                skipNoRead: true
             }
         }, methods: {
-
+            showInfoBlock() {
+                this.$refs.skipInfo.style.height = this.$refs.skipInfo.scrollHeight + 39 + 'px';
+                this.$refs.skipInfo.style.borderTopWidth = "2px";
+                this.$refs.skipInfo.style.borderTopColor = "grey";
+                this.$refs.skipInfo.style.borderTopStyle = "solid";
+                this.skip = false;
+                this.$emit('incrementOpen');
+            },
+            skipInfoBlock() {
+                this.$refs.skipInfo.style.height = '0';
+                this.$refs.skipInfo.style.border = "none";
+                this.skip = true;
+            },
+            skipInfoBlockAndIncrementRead() {
+                this.$refs.skipInfo.style.height = '0';
+                this.$refs.skipInfo.style.border = "none";
+                this.skip = true;
+                this.$emit('incrementRead');
+                this.skipNoRead = false;
+            }
         }
     }
 </script>
@@ -33,7 +55,7 @@
         width: 40%;
         margin: 30px auto;
         border-radius: 10px;
-        padding: 30px;
+        padding: 30px 30px 15px;
         box-shadow: 10px 10px 10px 10px;
     }
 
@@ -44,33 +66,46 @@
         font-weight: bolder;
     }
 
-    .container > button {
-        width: 100px;
-        height: 30px;
+    .btns {
+        width: 110px;
+        height: 39px;
         border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         border: 2px solid green;
         color: green;
         background-color: #fff;
         cursor: pointer;
     }
 
-    .container > button:hover {
-        box-shadow: 2px 2px 2px 2px;
+    .btns:hover {
         background-color: green;
         color: #fff;
         transition: all 0.5s ease;
     }
 
     .info {
-        margin-top: 40px;
-        border-top: 2px solid grey;
-        padding: 20px 20px 0;
+        display: flex;
+        flex-direction: column;
+        /* justify-content: space-between; */
+        margin-top: 20px;
+        /* border-top: 2px solid grey; */
+        /* padding: 0 20px; */
+        height: 0;
+        overflow: hidden;
+        transition: all 0.5s ease;
+    }
 
+    .info > span {
+        display: block;
+        margin-top: 20px;
     }
 
     .buttons {
-        padding-top: 15px;
+        margin-top: 25px;
         display: flex;
+        align-items: center;
         justify-content: space-between;
         width: 50%;
     }
@@ -91,7 +126,7 @@
         background-color: white;
         color: green;
         transition: all 0.5s ease;
-        border: 1px solid green;
+        border: 2px solid green;
     }
 
     .noRead {
@@ -113,8 +148,7 @@
         font-style: italic;
     }
 
-    .skipInfo {
-        height: 0;
+    .skipBtn {
         display: none;
     }
 </style>
