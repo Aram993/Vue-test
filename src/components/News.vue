@@ -48,8 +48,7 @@
         }
     }
 </script>
-<style scoped>
-
+<style scoped lang="scss">
     .container {
         background-color: #fff;
         width: 40%;
@@ -59,7 +58,7 @@
         box-shadow: 10px 10px 10px 10px;
     }
 
-    .container > h1 {
+    h1 {
         margin-bottom: 30px;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         font-size: xx-large;

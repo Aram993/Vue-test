@@ -6,15 +6,16 @@ import Products from './components/Products.vue';
 import References from './components/References.vue';
 import AccordionWrapper from './components/AccordionWrapper.vue';
 import NewsBlock from './components/NewsBlock.vue';
+import MainParent from './components/provide-inject/MainParent.vue';
 
 export default {
   name: 'App',
-  components: {Counter, TodoList, ToDo, Products, References, AccordionWrapper, NewsBlock}
+  components: {Counter, TodoList, ToDo, Products, References, AccordionWrapper, NewsBlock, Main}
 }
 </script>
 
 <template>
-  <NewsBlock/>
+  <MainParent/>
 </template>
 
 <style scoped>
