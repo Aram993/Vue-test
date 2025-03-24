@@ -7,6 +7,7 @@ import References from './components/References.vue';
 import AccordionWrapper from './components/AccordionWrapper.vue';
 import NewsBlock from './components/NewsBlock.vue';
 import MainParent from './components/provide-inject/MainParent.vue';
+import Main from './components/toDoList/Main.vue';
 
 export default {
   name: 'App',
@@ -15,7 +16,7 @@ export default {
 </script>
 
 <template>
-  <MainParent/>
+  <Main/>
 </template>
 
 <style scoped>
