@@ -1,16 +1,15 @@
 <template>
-        <input type="text" autofocus :placeholder="placeholderValue" :value="myValue">
+    <input type="text" autofocus :placeholder="placeholderValue" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)">
 </template>
 <script>
     export default {
-        props: ["placeholderValue", "myValue"],
+        props: ["placeholderValue", "modelValue"],
+        emits: ['update:modelValue'],
         name: "ToDoInput",
         data() {
             return {
 
             }
-        }, methods: {
-
         }
     }
 </script>

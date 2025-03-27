@@ -1,19 +1,19 @@
 <template>
     <div class="taskToDo">
-        <span class="taskToDo-date">{{ taskDate }}</span>
+        <span class="taskToDo-date">{{ taskData.date }}</span>
         <div class="taskToDo-name">
-            <label :for="inputId" :class="{'lineThrough': taskDone}">{{ taskName }}</label>
-            <input type="checkbox" class="taskInpt" :id="inputId" :checked="taskDone" @change="$emit('changeInput')">
+            <label :for="index" :class="{'lineThrough': taskData.done}">{{ taskData.name }}</label>
+            <input type="checkbox" class="taskInpt" :id="index" :checked="taskData.done" @change="$emit('changeInput', item)">
         </div>
-        <ToDoButton :deleteBtn="true" @click="$emit('deleteTask')">Удалить</ToDoButton>
-        <ToDoButton :edit-btn="true" @click="$emit('toggleModal')">Изменить</ToDoButton>
+        <ToDoButton type="red" @click="$emit('deleteTask', index)">Удалить</ToDoButton>
+        <ToDoButton type="yellow" @click="$emit('toggleModal', index)">Изменить</ToDoButton>
     </div>
 </template>
 <script>
 import ToDoButton from './ToDoButton.vue';
 
 export default {
-    props: ["taskName", "taskDate", "inputId", "taskDone"],
+    props: [ "taskData", "index",],
     emits: ["deleteTask", "changeInput", "toggleModal"],
     components: {ToDoButton},
     name: "ToDoTask",

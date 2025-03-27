@@ -7,20 +7,20 @@
             <div class="modal-window">
                 <div class="mtop">
                     <label for="mt">Введите название задачи</label>
-                    <input type="text" id="mt" :value="modalTaskName" @change="$emit('update:modelName', $event.target.value)">
+                    <input type="text" id="mt" :value="taskName" @input="$emit('update:taskName', $event.target.value)">
                 </div>
                 <div class="mtop">
                     <label for="mm">Введите дату создания</label>
-                    <input type="date" id="mm" :value="modalTaskDate" @change="$emit('update:modelDate', $event.target.value)">
+                    <input type="date" id="mm" :value="taskDate" @input="$emit('update:taskDate', $event.target.value)">
                 </div>
                 <div class="mbottom">
-                    <input type="radio" id="mcontactChoice1" name="contact" value="yes" :checked="modalDone"/>
+                    <input type="radio" id="mcontactChoice1" name="contact" value="true" :checked="taskDone" @input="$emit('update:taskDone', true)"/>
                     <label for="mcontactChoice1">Задача выполнена</label>
                 
-                    <input type="radio" id="mcontactChoice2" name="contact" value="no" :checked="modalNotDone"/>
+                    <input type="radio" id="mcontactChoice2" name="contact" value="false" :checked="!taskDone" @input="$emit('update:taskDone', false)"/>
                     <label for="mcontactChoice2">Задача не выполнена</label>
                 </div>
-                <ToDoButton :submit="true" class="btn-center" @click="$emit('applyChanges')">Отправить</ToDoButton>
+                <ToDoButton type="green" class="btn-center" @click="$emit('applyChanges')">Отправить</ToDoButton>
             </div>
         </div>
     </div>
@@ -29,8 +29,8 @@
 import ToDoButton from './ToDoButton.vue';
 
 export default {
-    props: ["modalShow", "modalTaskName", "modalTaskDate", "modalDone", "modalNotDone"],
-    emits: ["closeModal", 'update:modelName', "applyChanges", 'update:modelDate'],
+    props: ["modalShow", "taskName", "taskDone", "taskDate"],
+    emits: ["closeModal", 'update:taskName', 'update:taskDate', 'update:taskDone', 'update:taskDone', "applyChanges"],
 
     components: {ToDoButton},
     name: "ToDoModal",

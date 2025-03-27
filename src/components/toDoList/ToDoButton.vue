@@ -1,19 +1,13 @@
 <template>
-    <button :class="{'btn': true, 'btn-submit': submit, 'btn-delete': deleteBtn, 'btn-edit': editBtn}">
+    <button @click="$emit('onClick')" :class="['btn', $props.type]">
         <slot></slot>
     </button>
 </template>
 <script>
 export default {
-    props: ["submit", "deleteBtn", "editBtn"],
+    props: ["type"],
+    emits: ['onClick'],
     name: "ToDoButton",
-    data() {
-        return {
-
-        }
-    }, methods: {
-
-    }
 }
 </script>
 <style scoped lang="scss">
@@ -22,7 +16,7 @@ export default {
         transition: all 0.3s ease-in-out;
         cursor: pointer;
 
-        &-submit {
+        &.green {
             width: 300px;
             height: 40px;
             background-color: green;
@@ -36,7 +30,7 @@ export default {
             }
         }
 
-        &-delete {
+        &.red {
             width: 100px;
             height: 30px;
             background-color: red;
@@ -50,7 +44,7 @@ export default {
             }
         }
 
-        &-edit {
+        &.yellow {
             width: 100px;
             height: 30px;
             background-color: rgb(184, 184, 4);

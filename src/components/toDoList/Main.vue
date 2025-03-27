@@ -2,30 +2,25 @@
     <div class="container">
         <div class="info">
             <h2 class="info-header">Введите название задачи</h2>
-            <ToDoInput class="info-input" :placeholder-value="placeholderValue" :my-value="taskName" @change="getInputValue"/>
-            <ToDoButton :submit="true" @click="createTask">Ввести задачу</ToDoButton>
+            <ToDoInput class="info-input" placeholder-value="Task..." v-model="taskName"/>
+            <ToDoButton type="green" @on-click="createTask">Ввести задачу</ToDoButton>
         </div>
         <div class="tasks">
             <h2 class="tasks-header">Список задач:</h2>
             <ToDoTask v-for="(item, index) in task" :key="item.name"
-            :task-name="item.name" 
-            :task-date="item.date" 
-            :input-id="index" 
-            :task-done="item.done" 
-            @delete-task="delTask(index)"
-            @change-input="changeTaskDone(item)"
-            @toggle-modal="openModal(index)"/>
+            :task-data="item"
+            :index="index"
+            @delete-task="delTask"
+            @change-input="changeTaskDone"
+            @toggle-modal="openModal"/>
         </div>
         <ToDoModal 
         :modal-show="showModal"
-        :modal-task-name="modalTaskName"
-        :modal-task-date="modalTaskDate"
-        :modal-done="modalTaskDone"
-        :modal-not-done="modalTaskNotDone"
         @close-modal="closeModal"
-        @update:model-name="newValue => modalTaskName = newValue"
-        @update:model-date="newValue => modalTaskDate = newValue"
-        @apply-changes="changeTaskArray(taskIndex)"/>
+        v-model:task-name="modalTaskName"
+        v-model:task-date="modalTaskDate"
+        v-model:task-done="modalTaskDone"
+        @apply-changes="changeTaskArray"/>
     </div>
 </template>
 <script>
@@ -40,24 +35,7 @@ import ToDoModal from './ToDoModal.vue';
         name: "Main",
         data() {
             return {
-                placeholderValue: "Задача...",
-
                 task: [
-                    {
-                        date: convertDate(),
-                        name: "Strongest",
-                        done: true
-                    },
-                    {
-                        date: convertDate(),
-                        name: "Richest",
-                        done: false
-                    },
-                    {
-                        date: convertDate(),
-                        name: "Healthyest",
-                        done: true
-                    },
                     {
                         date: convertDate(),
                         name: "Ready",
@@ -73,7 +51,6 @@ import ToDoModal from './ToDoModal.vue';
                         name: "Go",
                         done: true
                     }
-
                 ],
 
                 taskName: "",
@@ -82,7 +59,7 @@ import ToDoModal from './ToDoModal.vue';
                 modalTaskName: "",
                 modalTaskDate: "",
                 modalTaskDone: false,
-                modalTaskNotDone: false,
+
                 taskIndex: null
             }
 
@@ -98,10 +75,6 @@ import ToDoModal from './ToDoModal.vue';
                 this.taskName = "";
             },
 
-            getInputValue(event) {
-                this.taskName = event.target.value;
-            },
-
             delTask(index) {
                 this.task.splice(index, 1);
             },
@@ -112,14 +85,9 @@ import ToDoModal from './ToDoModal.vue';
 
             openModal(idx) {
                 this.showModal = false;
-                this.task.forEach((item, index) => {
-                    if (index === idx) {
-                        this.modalTaskName = item.name;
-                        this.modalTaskDate = item.date;
-                        this.modalTaskDone = item.done;
-                        this.modalTaskNotDone = !item.done;
-                    }
-                })
+                this.modalTaskName = this.task[idx].name;
+                this.modalTaskDate = this.task[idx].date;
+                this.modalTaskDone = this.task[idx].done;
                 this.taskIndex = idx;
             },
             
@@ -127,12 +95,21 @@ import ToDoModal from './ToDoModal.vue';
                 this.showModal = true;
             },
 
-            changeTaskArray(idx) {
-                this.task[idx].name = this.modalTaskName;
-                this.task[idx].date = this.modalTaskDate;
+            changeTaskArray() {
+                this.task[this.taskIndex].name = this.modalTaskName;
+                this.task[this.taskIndex].date = this.modalTaskDate;
+                this.task[this.taskIndex].done = this.modalTaskDone;
                 this.closeModal()
             }
-        }
+        },
+        watch: {
+            task: {
+                handler(newValue, oldValue) {
+                    console.log(newValue);
+                },
+                deep: true
+            }
+  }
     }
 </script>
 <style scoped lang="scss">
