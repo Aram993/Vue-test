@@ -1,5 +1,5 @@
 <template>
-    <MarketSelect class="category" :products-array="products" v-model="categoryName" />
+    <MarketSelect class="category" :products-array="categories" v-model="categoryName" empty-value="Choose category"/>
     <MarketSelect class="price" :products-array="sortedPrice" v-model="priceDirection" />
     <MarketPriceRange @send-input-values="getData"/>
     <MarketCardField :new-arr="getFilteredProducts" :after="priceAfter" :before="priceBefore"/>
@@ -69,6 +69,9 @@ export default {
             }
 
             return arr;
+        },
+        categories(){
+           return new Set(this.products.map(item => item.category));
         }
     }
 }

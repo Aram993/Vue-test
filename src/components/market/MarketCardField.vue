@@ -1,6 +1,6 @@
 <template>
     <main>
-        <MarketCard :new-arr="newArr" :after="after" :before="before"/>
+        <MarketCard :key="item.id" :cardData="item" :after="after" :before="before" v-for="item in newArr"/>
     </main>
 </template>
 <script>

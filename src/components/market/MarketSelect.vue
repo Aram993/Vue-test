@@ -1,35 +1,20 @@
 <template>
     <select class="select-css" @change="$emit('update:modelValue', $event.target.value)">
-        <option value="" v-if="productsArray.length > 2">Выберите категорию</option>
-        <option :value="item" v-for="item in categoryProducts">{{ item }}</option>
+        <option value="" v-if="emptyValue">{{ emptyValue }}</option>
+        <option :value="item" v-for="item in productsArray">{{ item }}</option>
     </select>
 </template>
 <script>
 export default {
     name: "MarketSelect",
-    props: ["productsArray"],
+    props: ["productsArray", "emptyValue"],
     emits: ['update:modelValue'],
     data() {
         return {
             selectValue: ""
         }
-    }, methods: {
-    
-    }, computed: {
-        categoryProducts() {
-            const arr = new Set();
-            if (this.productsArray.length > 2) {
-                this.productsArray.forEach(item => {
-                    arr.add(item.category);
-                });
-            } else {
-                this.productsArray.forEach(item => {
-                    arr.add(item);
-                })
-            }
-            return arr;
-        }
     }
+    
 }
 </script>
 <style lang="scss" scoped>
