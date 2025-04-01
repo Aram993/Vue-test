@@ -11,6 +11,7 @@ import Main from './components/toDoList/Main.vue';
 import MarketMain from './components/market/MarketMain.vue';
 import People from './components/People.vue';
 import Employees from './components/employees/Employees.vue';
+import Resume from './components/resume/Resume.vue';
 
 
 
@@ -18,12 +19,12 @@ import Employees from './components/employees/Employees.vue';
 
 export default {
   name: 'App',
-  components: {Counter, TodoList, ToDo, Products, References, AccordionWrapper, NewsBlock, Main, MarketMain, People, Employees}
+  components: {Counter, TodoList, ToDo, Products, References, AccordionWrapper, NewsBlock, Main, MarketMain, People, Employees, Resume}
 }
 </script>
 
 <template>
-  <Employees/>
+  <Resume/>
 </template>
 
 <style scoped>

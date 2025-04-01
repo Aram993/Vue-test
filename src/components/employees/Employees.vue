@@ -8,12 +8,12 @@
         :is-close-modal="isCloseModal"
         @close-modal="closeModal"
         @send-data="action"/>
-        <div class="btn" v-if="!counter">
+        <div class="btn" v-if="!employees.length">
             <EmployeesButton :buttonValue="buttonTitle" @get-employees="getEmployees"/>
         </div>
         <main v-else>
             <div class="buttons">
-                <EmployeesButton :button-value="buttonPost" @get-employees="isCloseModal = false, action = addEmployee"/>
+                <EmployeesButton button-value="Add user" @get-employees="isCloseModal = false, action = addEmployee"/>
                 <EmployeesButton :button-value="buttonDelete" @get-employees="isCloseModal = false, action = deleteEmployee"/>
                 <!-- <EmployeesButton :button-value="buttonEdit" @get-employees="isCloseModal = false"/> -->
             </div>
@@ -46,19 +46,18 @@ export default {
             buttonDelete: "Удалить сотрудника",
             buttonEdit: "Изменить данные сотрудника",
             employees: [],
-            counter: 0,
             isCloseModal: true,
             employeeName: "",
             employeeSurname: "",
             employeeDateOfBirth: "",
             employeeCountry: "",
             action: "",
-            arrayIndex: null
+            arrayIndex: null ,
+            modalType: null
         }
     }, methods: {
         async getEmployees() {
             try {
-                this.counter++;
                 const response = await axios.get("http://localhost:3000/employees");
                 this.employees = [...response.data];
             } catch(error) {
@@ -153,6 +152,7 @@ export default {
             this.isCloseModal = true;
             this.clearInputs();
         }
+        
 
     }
 }
