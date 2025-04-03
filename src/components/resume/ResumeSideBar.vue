@@ -13,7 +13,6 @@
             </div>
             <textarea placeholder="Введите текст..." v-model="textAreaValue"></textarea>
             <button @click="onAddBlock">Добавить</button>
-            <button @click="$emit('saveChanges')">Сохранить</button>
         </div>
         <div :class="{'success-message': true, 'hide': !hideBlock}">
             <span>Успешно</span>
@@ -24,7 +23,7 @@
 export default {
     name: "ResumeSideBar",
     props: ["blocks", "btnDisabled", "hideBlock"],
-    emits: ["addBlock", "getResume", "saveChanges"],
+    emits: ["addBlock", "getResume"],
     data() {
         return {
             selectValue: "title",
@@ -107,7 +106,7 @@ export default {
     .success-message {
         border: 2px solid green;
         position: absolute;
-        top: 80%;
+        top: 57%;
         left: 28%;
         transform: translate(-50%, -50%);
         display: flex;

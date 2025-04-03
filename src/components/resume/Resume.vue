@@ -8,8 +8,7 @@
                 :btn-disabled="isBtnDisabled"
                 :hide-block="isShownSucessBlock"
                 @add-block="addBlock"
-                @get-resume="getResume"
-                @save-changes="saveChanges"/>
+                @get-resume="getResume"/>
                 <ResumeEditor :blocks="blocks"/>
             </div>
     </div>
@@ -39,12 +38,14 @@ export default {
                 if (block.type === "title") {
                     if (this.blocks[i].type === "title") {
                         this.blocks[i].value = block.value;
+                        this.changeResume(this.blocks[i].id, block);
                         break;
                     }
                     continue;
                 } else if (block.type === "avatar") {
                     if (this.blocks[i].type === "avatar") {
                         this.blocks[i].value = block.value;
+                        this.changeResume(this.blocks[i].id, block);
                         break;
                     }
                     continue;
@@ -58,6 +59,7 @@ export default {
             }
 
             this.blocks.push(result);
+            this.addInfoToResume(block);
         },
 
         async getResume() {
@@ -74,34 +76,30 @@ export default {
             }
         },
 
-        saveChanges() {
-            this.isShownSucessBlock = true;
-            this.blocks.forEach(item => {
-                if (item.type === "title" || item.type === "avatar") {
-                    this.changeResume(item.id, item);
-                } else {
-                    this.addInfoToResume(item);
-                }
-            })
-            setTimeout(()=>{
-                this.isShownSucessBlock = false;
-            }, 3000)
-        },
-
         async changeResume(id, element) {
             try {
+                this.isShownSucessBlock = true;
                 const response = await axios.put(`http://localhost:3000/resume/${id}`, element);
             } catch(err) {
                 console.error(err);
+            } finally {
+                setTimeout(()=>{
+                    this.isShownSucessBlock = false;
+                }, 2000)
             }
             
         },
 
         async addInfoToResume(element) {
             try {
+                this.isShownSucessBlock = true;
                 const response = await axios.post("http://localhost:3000/resume", element);
             } catch(err) {
                 console.error(err);
+            } finally {
+                setTimeout(()=>{
+                    this.isShownSucessBlock = false;
+                }, 2000)
             }
         }
     }
