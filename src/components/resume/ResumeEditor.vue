@@ -4,7 +4,7 @@
             <h1 v-if="block.type === 'title'">{{ block.value }}</h1>
             <h2 v-else-if="block.type === 'subtitle'">{{ block.value }}</h2>
             <p v-else-if="block.type === 'text'">{{ block.value }}</p>
-            <img v-else :src="block.value">
+            <img v-else-if="block.type === 'avatar'" :src="block.value">
         </div>
     </div>
 </template>

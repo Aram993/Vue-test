@@ -1,25 +1,36 @@
 <template>
-    <span class="loader"></span>
+    <div :class="{'loader': true, 'hide-loader': hideLoader}"></div>
 </template>
-
-<style>
+<script>
+    export default {
+        name: "Loader",
+        props:["hideLoader"]
+    }
+</script>
+<style scoped>
     .loader {
-    width: 48px;
-    height: 48px;
-    border: 5px solid #FFF;
-    border-bottom-color: #FF3D00;
-    border-radius: 50%;
-    display: inline-block;
-    box-sizing: border-box;
-    animation: rotation 1s linear infinite;
+        width: fit-content;
+        font-weight: bold;
+        font-family: sans-serif;
+        font-size: 30px;
+        padding: 0 5px 8px 0;
+        background: repeating-linear-gradient(90deg,currentColor 0 8%,#0000 0 10%) 200% 100%/200% 3px no-repeat;
+        animation: l3 2s steps(6) infinite;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .loader:before {
+        content:"Loading..."
+    }
+    @keyframes l3 {
+        to{
+            background-position: 80% 100%
+        }
     }
 
-    @keyframes rotation {
-    0% {
-        transform: rotate(0deg);
+    .hide-loader {
+        display: none;
     }
-    100% {
-        transform: rotate(360deg);
-    }
-    } 
 </style>
