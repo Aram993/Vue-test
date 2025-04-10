@@ -1,33 +1,30 @@
 <template>
-    <div :class="{'loader': true, 'hide-loader': hideLoader}"></div>
+<div :class="{'loader': true, 'hide-loader': !isLoading}"></div>
 </template>
 <script>
     export default {
         name: "Loader",
-        props:["hideLoader"]
+        props:["isLoading"]
     }
 </script>
 <style scoped>
     .loader {
-        width: fit-content;
-        font-weight: bold;
-        font-family: sans-serif;
-        font-size: 30px;
-        padding: 0 5px 8px 0;
-        background: repeating-linear-gradient(90deg,currentColor 0 8%,#0000 0 10%) 200% 100%/200% 3px no-repeat;
-        animation: l3 2s steps(6) infinite;
+        width: 120px;
+        height: 60px;
+        border-radius: 200px 200px 0 0;
+        -webkit-mask: repeating-radial-gradient(farthest-side at bottom ,#0000 0,#000 1px 12%,#0000 calc(12% + 1px) 20%);
+        background:
+        radial-gradient(farthest-side at bottom,#514b82 0 95%,#0000 0) bottom/0% 0% no-repeat
+        #ddd;
+        animation: l10 2s infinite steps(6);
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        z-index: 90;
     }
-    .loader:before {
-        content:"Loading..."
-    }
-    @keyframes l3 {
-        to{
-            background-position: 80% 100%
-        }
+    @keyframes l10 {
+        100% {background-size:120% 120%}
     }
 
     .hide-loader {

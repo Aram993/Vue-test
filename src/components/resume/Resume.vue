@@ -1,5 +1,5 @@
 <template >
-    <Loader :hide-loader="ishidenLoader"/>
+    <Loader :is-loading="isLoading"/>
     <div class="root">
         <div class="container">
             <div class="wrapper">
@@ -11,6 +11,8 @@
                 @get-resume="getResume"/>
                 <ResumeEditor :blocks="blocks"/>
             </div>
+            <button>Press</button>
+
     </div>
   </div>
 </template>
@@ -26,13 +28,14 @@ export default {
     data() {
         return {
             blocks: [],
+            isLoading: false,
             ishidenLoader: true,
             isBtnDisabled: false,
             isShownSucessBlock: false
         }
     }, methods: {
         addBlock(block) {
-            let result = "";
+            let result = {};
 
             for (let i = 0; i < this.blocks.length; i++) {
                 if (block.type === "title") {
@@ -66,6 +69,7 @@ export default {
             try {
                 this.ishidenLoader = false;
                 this.isBtnDisabled = true;
+                this.isLoading = true;
                 const response = await axios.get("http://localhost:3000/resume");
                 this.blocks = [...response.data];
             } catch(err) {
@@ -73,6 +77,7 @@ export default {
             } finally {
                 this.ishidenLoader = true;
                 this.isBtnDisabled = false;
+                this.isLoading = false;
             }
         },
 
@@ -92,8 +97,9 @@ export default {
 
         async addInfoToResume(element) {
             try {
-                this.isShownSucessBlock = true;
+            
                 const response = await axios.post("http://localhost:3000/resume", element);
+                this.isShownSucessBlock = true;
             } catch(err) {
                 console.error(err);
             } finally {
