@@ -1,5 +1,8 @@
 <template>
     <form>
+        <h1>
+            <slot></slot>
+        </h1>
         <div>
             <label for="name">Введите Ваше имя:</label>
             <input type="text" id="name" :value="contactName" @change="$emit('update:contactName', $event.target.value)">
@@ -33,6 +36,12 @@ export default {
         border: 4px  solid white;
         padding: 20px;
         margin: 50px ;
+
+        > h1 {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: bolder;
+            color: red;
+        }
 
         > div {
             display: flex;

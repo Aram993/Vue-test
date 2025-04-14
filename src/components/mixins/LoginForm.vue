@@ -1,5 +1,8 @@
 <template>
     <form>
+        <h1>
+            <slot></slot>
+        </h1>
         <div>
             <label for="email">Введите Ваш Email:</label>
             <input type="email" id="email" :value="userEmail" @change="$emit('update:userEmail', $event.target.value)">
@@ -26,10 +29,16 @@ export default {
         display: flex;
         flex-direction: column;
         width: 500px;
-        height: 200px;
+        height: 250px;
         border: 4px  solid white;
         padding: 20px;
         margin: 50px ;
+
+        h1 {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: bolder;
+            color: red;
+        }
 
         > div {
             display: flex;

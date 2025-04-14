@@ -1,13 +1,17 @@
 <template>
     <LoginForm 
-    v-model:user-email="userEmail"
-    v-model:user-password="userPassword"
-    @get-user-data="addUserData"/>
-    <ContactForm
-    v-model:contact-name="userName"
-    v-model:contact-email="contactEmail"
-    v-model:contact-message="userMessage"
-    @add-contact-data="addContactData"/>
+        v-model:user-email="userEmail"
+        v-model:user-password="userPassword"
+        @get-user-data="addUserData">
+        Login Form
+    </LoginForm>
+    <ContactForm 
+        v-model:contact-name="userName"
+        v-model:contact-email="contactEmail"
+        v-model:contact-message="userMessage"
+        @add-contact-data="addContactData">
+        Contact Form
+    </ContactForm>
 </template>
 <script>
 import ContactForm from './ContactForm.vue';
