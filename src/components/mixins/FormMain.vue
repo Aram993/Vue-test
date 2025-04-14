@@ -52,6 +52,8 @@ export default {
             if (this.isValidate) {
                 this.submitForm();
                 this.resetForm();
+            } else {
+                alert("Заполните форму полностью");
             }
             
             if (Object.keys(this.formData).length === 0) {
