@@ -9,6 +9,7 @@
             <PostsCard v-for="post in postsArray" :key="post.id" 
             :post-title="post.title" 
             :post-body="post.body"
+            :post="post"
             @choose-card="chooseCard(post.id)"/>
        </div>
        
@@ -75,14 +76,10 @@ export default {
 
     created() {
         this.getPosts();
-    },
-
-    mounted() {
-        document.addEventListener('keydown', this.handleKeydown);
     }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     .container {
         max-width: 1200px;
         width: 100%;

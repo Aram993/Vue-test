@@ -1,17 +1,17 @@
 <template>
     <div class="card" @click="$emit('chooseCard')">
-            <div class="info-first">{{ postTitle }}</div>
-            <div class="info-last">{{ postBody }}</div>
+            <div class="info-first">{{ post.title }}</div>
+            <div class="info-last">{{ post.body }}</div>
     </div>
 </template>
 <script>
 export default {
     name: "PostsCard",
-    props: ["postTitle", "postBody"],
+    props: ["postTitle", "postBody", "post"],
     emits: ["chooseCard"]
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     .card {
         height: 300px;
         overflow-y: hidden;

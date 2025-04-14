@@ -5,11 +5,11 @@
                 <img src="@/assets/images/cross.svg" />
             </div>
             <div class="modal-window">
+                <div>{{ time }}</div>
                 <div class="info">Комментарии из поста № {{ postId }}</div>
                 <div class="mtop" v-for="(comment, index) in comments" :key="comment.id">
                     <span>Комментарий № {{ index + 1 }}</span>
                     <span>{{ comment.body }}</span>
-                    
                 </div>
                 
             </div>
@@ -21,18 +21,53 @@ export default {
     name: "PostsModal",
     props: ["isShownModal", "comments", "postId"],
     emits: ["closeModal"],
+    data() {
+        return {
+            timer: null,
+            time: "00-00-00",
+            counter: 0,
+            minutes: 0,
+            seconds: 0,
+            hour: 0
+        }
+    },
+
+    methods: {
+        handleKeydown(event) {
+            console.log(1);
+            if (event.key === "Escape") {
+                this.$emit("closeModal");
+            }
+        }
+    },
 
     mounted() {
         document.querySelector("body").style.overflow = "hidden";
-        
+        document.addEventListener('keydown', this.handleKeydown);
+        // this.timer = setInterval(()=> {
+        //     this.counter++;
+        //     let seconds = this.counter
+        //     if (seconds < 10) {
+        //         this.time = `00-00-0${seconds}`;
+        //     } else if (seconds > 9 && seconds < 59) {
+        //         this.time = `00-00-${seconds}`;
+        //     } else if (seconds > 59 && seconds < 600) {
+        //         this.counter = 0;
+                
+        //         let minutes = this.counter;
+        //         this.time = `00-01-0${minutes}`;
+        //     }
+            
+        // }, 500)
     },
 
     beforeUnmount() {
         document.querySelector("body").style.overflow = "auto";
+        document.removeEventListener('keydown', this.handleKeydown);
     }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     .modal-background {
         background: rgba(0, 0, 0, 0.8);
         position: fixed;
@@ -45,9 +80,11 @@ export default {
 
     .modal-active {
         position: absolute;
-        width: 550px;
+        max-width: 550px;
+        width: 100%;
         height: 495px;
-        overflow: hidden;
+        overflow-y: scroll;
+        overflow-x: hidden;
         top: calc(50% - 250px);
         left: calc(50% - 175px);
         border-radius: 10px;
@@ -75,10 +112,10 @@ export default {
 
     .modal-window {
         position: relative;
-        margin-top: 50px;
+        margin-top: 30px;
         display: flex;
         flex-direction: column;
-        gap: 30px;
+        gap: 20px;
 
     }
 

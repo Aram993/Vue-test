@@ -14,6 +14,8 @@ import Employees from './components/employees/Employees.vue';
 import Resume from './components/resume/Resume.vue';
 import Hooks from './components/lifecycle-hooks/Hooks.vue';
 import PostsMain from './components/posts/PostsMain.vue';
+import SomeBlock from './components/mixins/SomeBlock.vue';
+import FormMain from './components/mixins/FormMain.vue';
 
 
 
@@ -22,12 +24,12 @@ import PostsMain from './components/posts/PostsMain.vue';
 
 export default {
   name: 'App',
-  components: {Counter, TodoList, ToDo, Products, References, AccordionWrapper, NewsBlock, Main, MarketMain, People, Employees, Resume, Hooks, PostsMain}
+  components: {Counter, TodoList, ToDo, Products, References, AccordionWrapper, NewsBlock, Main, MarketMain, People, Employees, Resume, Hooks, PostsMain, SomeBlock, FormMain}
 }
 </script>
 
 <template>
-  <PostsMain/>
+  <FormMain/>
 </template>
 
 <style scoped>
