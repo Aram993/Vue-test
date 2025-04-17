@@ -5,11 +5,7 @@
         @get-user-data="addUserData">
         Login Form
     </LoginForm>
-    <ContactForm 
-        v-model:contact-name="userName"
-        v-model:contact-email="contactEmail"
-        v-model:contact-message="userMessage"
-        @add-contact-data="addContactData">
+    <ContactForm>
         Contact Form
     </ContactForm>
 </template>
@@ -29,7 +25,8 @@ export default {
             userName: "",
             contactEmail: "",
             userMessage: "",
-            isValidate: false
+            isValidate: false,
+            arr: []
         }
     },
 

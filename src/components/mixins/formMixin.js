@@ -7,21 +7,23 @@ export default {
 
     methods: {
         validateForm() {
-            let result = true;
             for (let key in this.formData) {
                 if (this.formData[key].length === 0) {
-                    result = false;
+                    return false;
                 }
             }
-            return result;
+
+            return true;
         },
 
-        submitForm() {
-            console.log(this.formData);
+        async submitForm() {
+            await this.sendForm?.();
         },
 
         resetForm() {
-            this.formData = {};
+            for (let key in this.formData) {
+                this.formData[key] = "";
+            }
         }
     }
     

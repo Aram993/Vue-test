@@ -16,6 +16,8 @@ import Hooks from './components/lifecycle-hooks/Hooks.vue';
 import PostsMain from './components/posts/PostsMain.vue';
 import SomeBlock from './components/mixins/SomeBlock.vue';
 import FormMain from './components/mixins/FormMain.vue';
+import TimerDisplay from './components/timer/TimerDisplay.vue';
+import QuizQuestion from './components/timer/QuizQuestion.vue';
 
 
 
@@ -24,12 +26,12 @@ import FormMain from './components/mixins/FormMain.vue';
 
 export default {
   name: 'App',
-  components: {Counter, TodoList, ToDo, Products, References, AccordionWrapper, NewsBlock, Main, MarketMain, People, Employees, Resume, Hooks, PostsMain, SomeBlock, FormMain}
+  components: {Counter, TodoList, ToDo, Products, References, AccordionWrapper, NewsBlock, Main, MarketMain, People, Employees, Resume, Hooks, PostsMain, SomeBlock, FormMain, TimerDisplay, QuizQuestion}
 }
 </script>
 
 <template>
-  <FormMain/>
+  <QuizQuestion/>
 </template>
 
 <style scoped>
