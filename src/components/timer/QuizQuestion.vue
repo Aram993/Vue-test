@@ -1,18 +1,21 @@
 <template>
     <div class="wrap">
-        <TimerTime>{{ time }}</TimerTime>
+        <TimerTime>{{ convertTimeToString(count) }}</TimerTime>
         <div class="container">
-            <div :class="{'card': true, 'next-question': index === btnId ? true : false}" v-for="(question, index) in questions" :ref="index">
-                <div :id="index">{{ question }}</div>
-                <button @click="changeQuestion(index)">Следующий вопрос</button>
+            <div :class="{'card': true}">
+                <div>{{ questions[questionsIndex]}}</div>
+                <button @click="changeQuestion()">Следующий вопрос</button>
             </div>
+           
         </div>
+        <div>Hey hey</div>
     </div>
     
 </template>
 <script>
 import timerMixin from './timerMixin';
 import TimerTime from './TimerTime.vue';
+import { convertTimeToString } from '@/utils/converter';
 
 export default {
     name: "QuizQuestion",
@@ -34,19 +37,27 @@ export default {
                         "Как называется столица Австралии?"
                     ],
 
-            isNext: false,
-            btnId: null,
+            questionsIndex: 0
         }
     },
 
     methods: {
-        changeQuestion(idx) {
+        convertTimeToString,
+        changeQuestion() {
+            this.questionsIndex++;
             this.resetTimer();
-            this.btnId = idx;
-            this.$refs[`${idx}`][0].style.display = "none";
+            this.startTimer();
+        },
+        onTimeout() {
+            alert('Time is over');
+            this.questionsIndex = 0;
+            this.resetTimer();
             this.startTimer();
         }
-    }
+    },
+    // mounted() {
+    //     this.startTimer();
+    // }
 }
 </script>
 <style lang="scss" scoped>

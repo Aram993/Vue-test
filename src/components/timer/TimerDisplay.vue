@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <TimerTime>{{ time }}</TimerTime>
+        <TimerTime>{{ convertTimeToString(count) }}</TimerTime>
         <TimerButtons 
         :pressed-button="pressedButton"
         :is-btn-disabled="isBtnDisabled"
@@ -13,6 +13,7 @@
 import TimerButtons from './TimerButtons.vue';
 import timerMixin from './timerMixin';
 import TimerTime from './TimerTime.vue';
+import { convertTimeToString } from '@/utils/converter';
 
 export default {
     name: "TimerDisplay",
@@ -29,6 +30,7 @@ export default {
         }
     },
     methods: {
+        convertTimeToString,
         startTime() {
             this.clearObjectValues();
             this.pressedButton.startBtn = true;

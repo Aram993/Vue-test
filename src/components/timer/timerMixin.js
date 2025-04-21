@@ -1,47 +1,37 @@
 export default {
     data() {
         return {
-            time: "00:30",
             count: 30,
             interval: null,
-            isStopped: false,
         }
     },
 
     methods: {
         startTimer() {
-            this.isStopped = false;
-            this.createTimer()
-            this.interval = setInterval(this.createTimer, 1000)
-        },
+            if(this.interval) return;
 
-        createTimer() {
-            if (this.isStopped) {
-                clearInterval(this.interval);
-                this.count++;
-            }
-            this.count--;
-            this.time = `00:${this.count}`;
-            if (this.count < 10) {
-                this.time = `00:0${this.count}`
-            }
-
-            if (this.count < 1) {
-                clearInterval(this.interval);
-                this.isBtnDisabled = false;
-                this.count = 30;
-                this.time = `00:${this.count}`
-            }
+            this.interval = setInterval(() => {
+                if(this.count > 0) {
+                    this.count--;
+                }else {
+                    clearInterval(this.interval);
+                    this.onTimeout?.();
+                }
+            }, 1000)
         },
 
         stopTimer() {
-            this.isStopped = true;
+            clearInterval(this.interval);
+            this.interval = null;
         },
 
         resetTimer() {
-            this.count = 31;
+            this.count = 30;
             clearInterval(this.interval);
-            this.createTimer();
+            this.stopTimer();
         }
     },
+    beforeUnmount() {
+        stopTimer();
+    }
 }

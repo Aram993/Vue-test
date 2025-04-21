@@ -18,6 +18,8 @@ import SomeBlock from './components/mixins/SomeBlock.vue';
 import FormMain from './components/mixins/FormMain.vue';
 import TimerDisplay from './components/timer/TimerDisplay.vue';
 import QuizQuestion from './components/timer/QuizQuestion.vue';
+import BlockDirective from './components/directives/BlockDirective.vue';
+import CopyTest from './components/directives/CopyTest.vue';
 
 
 
@@ -26,12 +28,12 @@ import QuizQuestion from './components/timer/QuizQuestion.vue';
 
 export default {
   name: 'App',
-  components: {Counter, TodoList, ToDo, Products, References, AccordionWrapper, NewsBlock, Main, MarketMain, People, Employees, Resume, Hooks, PostsMain, SomeBlock, FormMain, TimerDisplay, QuizQuestion}
+  components: {Counter, BlockDirective, TodoList, ToDo, Products, References, AccordionWrapper, NewsBlock, Main, MarketMain, People, Employees, Resume, Hooks, PostsMain, SomeBlock, FormMain, TimerDisplay, QuizQuestion, CopyTest}
 }
 </script>
 
 <template>
-  <QuizQuestion/>
+ <CopyTest/>
 </template>
 
 <style scoped>
