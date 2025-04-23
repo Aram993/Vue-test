@@ -20,6 +20,8 @@ import TimerDisplay from './components/timer/TimerDisplay.vue';
 import QuizQuestion from './components/timer/QuizQuestion.vue';
 import BlockDirective from './components/directives/BlockDirective.vue';
 import CopyTest from './components/directives/CopyTest.vue';
+import Plugin from './components/Plugins/Plugin.vue';
+import DarkLightTheme from './components/Plugins/Dark-lightTheme.vue';
 
 
 
@@ -28,12 +30,12 @@ import CopyTest from './components/directives/CopyTest.vue';
 
 export default {
   name: 'App',
-  components: {Counter, BlockDirective, TodoList, ToDo, Products, References, AccordionWrapper, NewsBlock, Main, MarketMain, People, Employees, Resume, Hooks, PostsMain, SomeBlock, FormMain, TimerDisplay, QuizQuestion, CopyTest}
+  components: {Counter, Plugin, BlockDirective, TodoList, ToDo, Products, References, AccordionWrapper, NewsBlock, Main, MarketMain, People, Employees, Resume, Hooks, PostsMain, SomeBlock, FormMain, TimerDisplay, QuizQuestion, CopyTest, DarkLightTheme}
 }
 </script>
 
 <template>
- <CopyTest/>
+ <DarkLightTheme/>
 </template>
 
 <style scoped>

@@ -3,3 +3,13 @@ body {
     font-weight: 400;
     color: black;
 }
+
+.lightBackground {
+    background-color: white;
+    color: black;
+}
+
+.darkBackground {
+    background-color: black;
+    color: white;
+}

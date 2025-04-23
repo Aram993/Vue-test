@@ -1,12 +1,12 @@
 <template>
     <div class="container">
-       <p v-copy.alert="'Copy this text'">Это очень важный текст, скопируй его!</p>
+       <p v-copy.alert="'Copy this text'" @click="$emit('asd')">Это очень важный текст, скопируй его!</p>
        <button>Copy this text</button>
     </div>
 </template>
 <script>
 export default {
-    
+
 }
 </script>
 <style lang="scss" scoped>
