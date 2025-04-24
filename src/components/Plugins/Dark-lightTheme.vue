@@ -14,15 +14,16 @@
         <p>Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты. Ведущими напоивший переписали продолжил большого речью, образ текст грустный семантика власти своего это первую единственное домах они! Точках, сих текстами!</p>
     </div>
     <div class="btns">
-        <button @click="chooseDarkTheme">DarkTheme</button>
-        <button @click="chooseLightTheme">LightTheme</button>
+        <button :class="btnBackground" @click="chooseDarkTheme">DarkTheme</button>
+        <button :class="btnBackground" @click="chooseLightTheme">LightTheme</button>
     </div>
 </template>
 <script>
 export default {
     data() {
         return {
-            themeType: ""
+            themeType: "",
+            btnBackground: ""
         }
     },
     methods: {
@@ -30,11 +31,13 @@ export default {
             this.$setTheme('darkBackground');
             this.$getTheme();
             this.themeType = "whiteBorder";
+            this.btnBackground = "btnWhiteColor"
         },
         chooseLightTheme() {
             this.$setTheme('lightBackground');
             this.$getTheme();
             this.themeType = "blackBorder";
+            this.btnBackground = "btnDarkColor"
         }
     },
     mounted() {
@@ -72,5 +75,15 @@ export default {
 
     .whiteBorder {
         border: 2px solid white;
+    }
+
+    .btnWhiteColor {
+        background-color: #fff;
+        color: black;
+    }
+
+    .btnDarkColor {
+        background-color: black;
+        color: #fff;
     }
 </style>
