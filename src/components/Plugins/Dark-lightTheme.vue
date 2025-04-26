@@ -39,9 +39,6 @@ export default {
             this.themeType = "blackBorder";
             this.btnBackground = "btnDarkColor"
         }
-    },
-    mounted() {
-        this.$getTheme();
     }
 }
 </script>

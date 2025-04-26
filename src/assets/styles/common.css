@@ -4,12 +4,12 @@ body {
     color: black;
 }
 
-.lightBackground {
+body.lightBackground {
     background-color: white;
     color: black;
 }
 
-.darkBackground {
+body.darkBackground {
     background-color: black;
     color: white;
 }

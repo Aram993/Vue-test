@@ -6,6 +6,7 @@ import color from './directives/color.js';
 import copy from './directives/copy';
 import translation from './plugins/translation';
 import toggleTheme from './plugins/toggleTheme';
+import router from './router';
 
 const ru = {
     app: {
@@ -22,9 +23,5 @@ const en = {
 }
 
 createApp(App)
-.directive('focus', focus)
-.directive('color', color)
-.directive('copy', copy)
-.use(translation, {ru, en})
-.use(toggleTheme)
+.use(router)
 .mount('#app')
